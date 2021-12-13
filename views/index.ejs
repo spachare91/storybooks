@@ -1,0 +1,45 @@
+<%- include('partials/header') -%> 
+
+<div class="container">
+    <h1>Stories</h1>
+<div class="row">
+
+  <%  if(stories.length==0){ %>  
+        <h4>No stories</h4>
+
+ <%    }else{ %>  
+     
+
+ <% stories.forEach(function(story,index){ %>    
+
+
+            <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                    </div>
+                    <div class="card-content center-align">
+                        <h5><%= story.title  %> </h5>
+                        <p><%= story.body.replace(/(<p[^>]+?>|<p>|<\/p>)/img, "").substring(0,150) + "..." %> </p>
+                        <br>
+                        <div class="chip">
+                            <img src="<%= story.user.image  %> " alt="">
+                            <a href="/stories/user/<%= story.user._id %>"><%= story.user.displayName  %> </a>
+                        </div>
+                    </div>
+                    <div class="card-action center-align">
+                        <a href="/stories/<%= story._id %>" class="btn grey">Read More</a>
+                    </div>
+                </div>
+            </div>
+        
+
+      <% })  %>  
+
+  <%   } %> 
+   
+
+</div>
+
+</div>
+
+<%- include('footer') -%> 

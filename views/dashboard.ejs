@@ -1,0 +1,53 @@
+<%- include("partials/header") -%> 
+<div class="container">
+  <%- include("partials/addbtn") -%>
+
+<h3>Hello <%= name  %> </h3>
+
+<% if(stories.length==0) {%>
+  <h5>Sorry No stories</h5>
+<% }else {%>
+  <table class="striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+       <% stories.forEach((story,index)=>{ %>
+
+          <tr>
+            <td><a href="/stories/<%= story._id  %> "><%= story.title  %> </a></td>
+            <td><%= story.createdAt %> </td>
+            <td><span class="dash-status"><%= story.status  %> </span></td>
+            <td>
+                <a href="/stories/edit/<%= story._id  %>" class="btn btn-float">
+                    <i class="fas fa-edit"></i>
+                </a>
+
+                <form action="/stories/delete/<%= story._id %>"  method="POST" id="delete-form">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn red">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+ 
+
+      <%  }) %>
+       
+    </tbody>
+</table>
+
+
+
+<% } %> 
+</div>
+     
+  
+	
+         <%- include("footer") -%> 
