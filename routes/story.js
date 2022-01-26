@@ -117,8 +117,10 @@ router.get('/:id', ensureAuth, async (req, res) => {
     if (story.user._id != req.user.id && story.status == 'private') {
       res.render('404')
     } else {
+      var data=story.body.replace(/<p>(.*)<\/p>/g, "$1\n");
+
       res.render('show', {
-        story,
+        story:story,data:data
       })
     }
   } catch (err) {
